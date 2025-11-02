@@ -1,0 +1,12 @@
+.aboutblock{
+    box-sizing: border-box;
+    width: 100%;
+    padding-top:10%;
+    padding-bottom: 2%;
+    display: flex;
+    justify-content: center; 
+    color: #E7E5FF;
+    font-size: 160%;
+    font-family: "Montserrat", sans-serif;
+
+}
