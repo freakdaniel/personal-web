@@ -1,5 +1,5 @@
 import React from "react";
-import '/home/user/pw/personal-web/src/styles/header.css';
+import '../styles/header.css';
 import {Link} from "react-router-dom"
 import { NavButton } from "./NavButton";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import '/home/user/pw/personal-web/src/styles/backblur.css'
+import '../styles/backblur.css'
 
 const BackBlur = function(){
     

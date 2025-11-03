@@ -1,6 +1,6 @@
 import React from 'react';
 import { BaseEdge, getBezierPath } from '@xyflow/react';
-import '/home/user/pw/personal-web/src/styles/custom_edge.css'
+import '../styles/custom_edge.css'
 
 function CustomEdge({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, style = {}, markerEnd }) {
   // стандартная кривая Безье

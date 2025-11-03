@@ -1,6 +1,6 @@
 import React from 'react';
 import { Handle, Position } from '@xyflow/react';
-import '/home/user/pw/personal-web/src/styles/custom_nodes.css';
+import '../styles/custom_nodes.css';
 
 function CustomNode({ id, data }) {
   return (
