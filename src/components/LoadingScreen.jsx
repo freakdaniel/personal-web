@@ -45,7 +45,7 @@ const LoadingScreen = ({ logoStr, children }) => {
     if (imagesLoaded) {
       setPhase('content');
     } else {
-      console.log('LoadingScreen: Assets was NOT preloaded. Skip...');
+      console.log('LoadingScreen: Assets was NOT preloaded. Skipping...');
       setPhase('loading');
     }
   };
@@ -83,7 +83,7 @@ const LoadingScreen = ({ logoStr, children }) => {
             text={logoText}
             intensity={1.5}
             color="#ffffff"
-            className="text-5xl font-bold tracking-wider font-moc text-neutral-50"
+            className="text-5xl font-bold tracking-wider font-sync text-neutral-50"
             animateBy="letters"
             direction="top"
             delay={100}

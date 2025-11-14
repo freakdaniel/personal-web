@@ -1,3 +1,4 @@
+// Home.jsx
 import AnimatedContent from '../components/animations/AnimatedContent';
 import GlassSurface from '../components/others/GlassSurface';
 import TextPressure from "../components/text/TextPressure";
@@ -5,6 +6,7 @@ import { PawPrint, Webhook, Frame } from "lucide-react";
 import { SiGithub, SiSpotify, SiTelegram, SiInstagram } from "@icons-pack/react-simple-icons"
 import AnimatedScale from "../components/animations/AnimatedScale";
 import SocialMedia from "../components/SocialMedia";
+import FaultyTerminal from '../components/background/FaultyTerminal';
 
 export default function Home() {
     const socialConfigs = [
@@ -35,86 +37,104 @@ export default function Home() {
     ];
 
     return (
-        <div style={{ height: '100vh', width: '100vw' }}>
-            <AnimatedContent
-                distance={350}
-                reverse={true}
-                initialOpacity={0}
-                direction="vertical"
-                duration={1.2}
-                ease="power3.out"
-                animateOpacity
-                scale={1.5}
-                threshold={0.2}
-            >
-                <div className=" text-white">
-                    <div
-                        className="fixed inset-0 bg-cover bg-center filter blur-sm bg-[url(/imgs/riyo.jpg)] w-screen h-screen"
-                        style={{
-                            transform: 'scale(1.1)'
-                        }}
-                    />
-                    <div className="fixed inset-0 bg-black/40 w-screen h-screen" style={{ transform: 'scale(1.1)' }} />
+        <div className="relative w-screen h-screen overflow-hidden bg-black">
+            <div className='fixed inset-0 z-0'>
+                <FaultyTerminal
+                    scale={2}
+                    gridMul={[2, 1]}
+                    digitSize={1.2}
+                    timeScale={0.5}
+                    pause={false}
+                    scanlineIntensity={1}
+                    glitchAmount={1}
+                    flickerAmount={1}
+                    noiseAmp={1}
+                    chromaticAberration={0}
+                    dither={0}
+                    curvature={0.3}
+                    tint="#ffffff"
+                    mouseReact={true}
+                    mouseStrength={0.5}
+                    pageLoadAnimation={true}
+                    brightness={0.3}
+                />
+            </div>
 
-                    <div className="relative min-h-screen flex flex-col container mx-auto px-4 py-20 flex-1 items-center justify-center text-center">
-                        <div className="flex flex-row gap-4">
-                            <AnimatedScale>
-                                <GlassSurface className="p-1.5" height={50}>
-                                    <div className="flex flex-row gap-3 items-center">
-                                        <Webhook size={18} style={{ opacity: 0.7 }} />
-                                        <p className="text-white/70 text-lg select-none">Web-Developer</p>
-                                    </div>
-                                </GlassSurface>
-                            </AnimatedScale>
-                            <AnimatedScale>
-                                <GlassSurface className="p-1.5" height={50}>
-                                    <div className="flex flex-row gap-3 items-center">
-                                        <Frame size={18} style={{ opacity: 0.7 }} />
-                                        <p className="text-white/70 text-lg select-none">UI/UX Designer</p>
-                                    </div>
-                                </GlassSurface>
-                            </AnimatedScale>
-                            <AnimatedScale>
-                                <GlassSurface className="p-1.5" height={50}>
-                                    <div className="flex flex-row gap-3 items-center">
-                                        <PawPrint size={18} style={{ opacity: 0.7 }} />
-                                        <p className="text-white/70 text-lg select-none">Cats Enjoyeer</p>
-                                    </div>
-                                </GlassSurface>
-                            </AnimatedScale>
+            <div className="relative z-10 w-full h-full">
+                <AnimatedContent
+                    distance={350}
+                    reverse={true}
+                    initialOpacity={0}
+                    direction="vertical"
+                    duration={1.2}
+                    ease="power3.out"
+                    animateOpacity
+                    scale={1.5}
+                    threshold={0.2}
+                >
+                    <div className=" text-white">
+                        <div className="relative min-h-screen flex flex-col container mx-auto px-4 py-8 flex-1 items-center justify-center text-center"> {/* py-8 вместо py-20 для мобильных */}
+                            {/* <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 items-center justify-center w-full max-w-2xl">
+                                <AnimatedScale>
+                                    <GlassSurface className="p-1.5 min-w-[140px] sm:min-w-[180px]">
+                                        <div className="flex flex-row gap-2 items-center">
+                                            <Webhook size={16} style={{ opacity: 0.7 }} />
+                                            <p className="text-white/70 text-base sm:text-lg select-none">Web-Developer</p>
+                                        </div>
+                                    </GlassSurface>
+                                </AnimatedScale>
+                                <AnimatedScale>
+                                    <GlassSurface className="p-1.5 min-w-[140px] sm:min-w-[180px]">
+                                        <div className="flex flex-row gap-2 items-center">
+                                            <Frame size={16} style={{ opacity: 0.7 }} />
+                                            <p className="text-white/70 text-base sm:text-lg select-none">UI/UX Designer</p>
+                                        </div>
+                                    </GlassSurface>
+                                </AnimatedScale>
+                                <AnimatedScale>
+                                    <GlassSurface className="p-1.5 min-w-[140px] sm:min-w-[180px]">
+                                        <div className="flex flex-row gap-2 items-center">
+                                            <PawPrint size={16} style={{ opacity: 0.7 }} />
+                                            <p className="text-white/70 text-base sm:text-lg select-none">Cats Enjoyeer</p>
+                                        </div>
+                                    </GlassSurface>
+                                </AnimatedScale>
+                            </div> */}
+
+                            <div className="my-4 sm:my-8 w-full">
+                                <AnimatedContent
+                                    distance={150}
+                                    initialOpacity={0}
+                                    direction="vertical"
+                                    duration={1.4}
+                                    ease="power3.out"
+                                    animateOpacity
+                                    scale={1.2}
+                                    threshold={0.2}
+                                >
+                                    <TextPressure
+                                        text="FREAKSITE"
+                                        flex={true}
+                                        alpha={false}
+                                        stroke={false}
+                                        width={true}
+                                        weight={true}
+                                        italic={true}
+                                        textColor="rgba(255, 255, 255, 0.7)"
+                                        strokeColor="#ff0000"
+                                        className="select-none max-w-full"
+                                        style={{
+                                            fontSize: 'max(4rem, min(12rem, 8vw))', // Адаптивный размер шрифта
+                                        }}
+                                    />
+                                </AnimatedContent>
+                            </div>
+
+                            {/* <SocialMedia configs={socialConfigs} className="mt-2 sm:mt-4" /> */}
                         </div>
-
-                        <div>
-                            <AnimatedContent
-                                distance={150}
-                                initialOpacity={0}
-                                direction="vertical"
-                                duration={1.4}
-                                ease="power3.out"
-                                animateOpacity
-                                scale={1.2}
-                                threshold={0.2}
-                            >
-                                <TextPressure
-                                    text="FREAKSITE"
-                                    flex={true}
-                                    alpha={false}
-                                    stroke={false}
-                                    width={true}
-                                    weight={true}
-                                    italic={true}
-                                    textColor="rgba(255, 255, 255, 0.7)"
-                                    strokeColor="#ff0000"
-                                    minFontSize={288}
-                                    className="select-none"
-                                />
-                            </AnimatedContent>
-                        </div>
-
-                        <SocialMedia configs={socialConfigs} className="mt-4" />
                     </div>
-                </div>
-            </AnimatedContent>
+                </AnimatedContent>
+            </div>
         </div>
     )
 }
