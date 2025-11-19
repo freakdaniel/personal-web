@@ -7,6 +7,8 @@ import { SiGithub, SiSpotify, SiTelegram, SiInstagram } from "@icons-pack/react-
 import AnimatedScale from "../components/animations/AnimatedScale";
 import SocialMedia from "../components/SocialMedia";
 import FaultyTerminal from '../components/background/FaultyTerminal';
+import SplitText from '../components/text/SplitText';
+import TextType from '../components/text/TextType';
 
 export default function Home() {
     const socialConfigs = [
@@ -101,7 +103,7 @@ export default function Home() {
                                 </AnimatedScale>
                             </div> */}
 
-                            <div className="my-4 sm:my-8 w-full">
+                            <div className="my-4 sm:my-8 w-full max-w-4xl mx-auto">
                                 <AnimatedContent
                                     distance={150}
                                     initialOpacity={0}
@@ -113,7 +115,7 @@ export default function Home() {
                                     threshold={0.2}
                                 >
                                     <TextPressure
-                                        text="FREAKSITE"
+                                        text="DANIEL FREAK"
                                         flex={true}
                                         alpha={false}
                                         stroke={false}
@@ -122,15 +124,23 @@ export default function Home() {
                                         italic={true}
                                         textColor="rgba(255, 255, 255, 0.7)"
                                         strokeColor="#ff0000"
-                                        className="select-none max-w-full"
+                                        className="select-none max-w-full text-balance"
                                         style={{
-                                            fontSize: 'max(4rem, min(12rem, 8vw))', // Адаптивный размер шрифта
+                                            fontSize: 'max(3rem, min(10rem, 10vw))',
+                                        }}
+                                    />
+
+                                    <TextType
+                                        text={["WEB DEVELOPER", "BACKEND DEVELOPER", "AN AWESOME PERSON (✿◦’ᴗ˘◦)♡"]}
+                                        typingSpeed={80}
+                                        deletingSpeed={25}
+                                        className="mt-4 sm:mt-6 text-white/70 select-none max-w-full"
+                                        style={{
+                                            fontSize: 'max(1.125rem, min(1.5rem, 3vw))'
                                         }}
                                     />
                                 </AnimatedContent>
                             </div>
-
-                            {/* <SocialMedia configs={socialConfigs} className="mt-2 sm:mt-4" /> */}
                         </div>
                     </div>
                 </AnimatedContent>
