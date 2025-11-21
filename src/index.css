@@ -1,14 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
 @import "tailwindcss";
 
 @theme {
+    --font-neucha: "Neucha",
+    sans-serif;
     --font-sync: "Syncopate",
     sans-serif;
     --font-moc: "Mountains of Christmas",
     sans-serif;
 }
 
+html,
 body {
     background: #000;
 }

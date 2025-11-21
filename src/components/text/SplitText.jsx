@@ -19,10 +19,11 @@ const SplitText = ({
   rootMargin = '-100px',
   textAlign = 'center',
   tag = 'p',
+  container = null,
   onLetterAnimationComplete
 }) => {
   const ref = useRef(null);
-  const animationCompletedRef = useRef(false);
+  const animationCompletedRef = useRef(false); // Флаг: проигралась ли анимация
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
@@ -40,12 +41,16 @@ const SplitText = ({
       if (!ref.current || !text || !fontsLoaded) return;
       const el = ref.current;
 
+      let scrollerTarget = container || document.getElementById('snap-main-container') || null;
+      if (typeof scrollerTarget === 'string') {
+          scrollerTarget = document.querySelector(scrollerTarget);
+      }
+
+      // Очистка старых инстансов, если они остались
       if (el._rbsplitInstance) {
         try {
           el._rbsplitInstance.revert();
-        } catch (_) {
-          /* ignore */
-        }
+        } catch (_) { /* ignore */ }
         el._rbsplitInstance = null;
       }
 
@@ -53,12 +58,7 @@ const SplitText = ({
       const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin);
       const marginValue = marginMatch ? parseFloat(marginMatch[1]) : 0;
       const marginUnit = marginMatch ? marginMatch[2] || 'px' : 'px';
-      const sign =
-        marginValue === 0
-          ? ''
-          : marginValue < 0
-            ? `-=${Math.abs(marginValue)}${marginUnit}`
-            : `+=${marginValue}${marginUnit}`;
+      const sign = marginValue === 0 ? '' : marginValue < 0 ? `-=${Math.abs(marginValue)}${marginUnit}` : `+=${marginValue}${marginUnit}`;
       const start = `top ${startPct}%${sign}`;
 
       let targets;
@@ -79,6 +79,15 @@ const SplitText = ({
         reduceWhiteSpace: false,
         onSplit: self => {
           assignTargets(self);
+          
+          // 🔥 ИСПРАВЛЕНИЕ ЗДЕСЬ 🔥
+          // Если анимация уже была завершена ранее, просто ставим текст в финальную позицию
+          if (animationCompletedRef.current) {
+              gsap.set(targets, { ...to });
+              return; // Выходим, не создавая ScrollTrigger
+          }
+
+          // Иначе запускаем анимацию как обычно
           return gsap.fromTo(
             targets,
             { ...from },
@@ -89,13 +98,14 @@ const SplitText = ({
               stagger: delay / 1000,
               scrollTrigger: {
                 trigger: el,
+                scroller: scrollerTarget,
                 start,
                 once: true,
                 fastScrollEnd: true,
                 anticipatePin: 0.4
               },
               onComplete: () => {
-                animationCompletedRef.current = true;
+                animationCompletedRef.current = true; // Запоминаем, что анимация прошла
                 onLetterAnimationComplete?.();
               },
               willChange: 'transform, opacity',
@@ -112,9 +122,7 @@ const SplitText = ({
         });
         try {
           splitInstance.revert();
-        } catch (_) {
-          /* ignore */
-        }
+        } catch (_) { /* ignore */ }
         el._rbsplitInstance = null;
       };
     },
@@ -130,7 +138,8 @@ const SplitText = ({
         threshold,
         rootMargin,
         fontsLoaded,
-        onLetterAnimationComplete
+        onLetterAnimationComplete,
+        container
       ],
       scope: ref
     }
@@ -143,49 +152,19 @@ const SplitText = ({
       willChange: 'transform, opacity'
     };
     const classes = `split-parent overflow-hidden inline-block whitespace-normal ${className}`;
+    
+    // Простой маппинг тегов
+    const Tag = tag; 
+    // Если Tag передается как строка ('h1', 'p'), React поймет это автоматически
+    // Если у вас возникают ошибки с динамическим тегом, можно вернуть switch-case
     switch (tag) {
-      case 'h1':
-        return (
-          <h1 ref={ref} style={style} className={classes}>
-            {text}
-          </h1>
-        );
-      case 'h2':
-        return (
-          <h2 ref={ref} style={style} className={classes}>
-            {text}
-          </h2>
-        );
-      case 'h3':
-        return (
-          <h3 ref={ref} style={style} className={classes}>
-            {text}
-          </h3>
-        );
-      case 'h4':
-        return (
-          <h4 ref={ref} style={style} className={classes}>
-            {text}
-          </h4>
-        );
-      case 'h5':
-        return (
-          <h5 ref={ref} style={style} className={classes}>
-            {text}
-          </h5>
-        );
-      case 'h6':
-        return (
-          <h6 ref={ref} style={style} className={classes}>
-            {text}
-          </h6>
-        );
-      default:
-        return (
-          <p ref={ref} style={style} className={classes}>
-            {text}
-          </p>
-        );
+        case 'h1': return <h1 ref={ref} style={style} className={classes}>{text}</h1>;
+        case 'h2': return <h2 ref={ref} style={style} className={classes}>{text}</h2>;
+        case 'h3': return <h3 ref={ref} style={style} className={classes}>{text}</h3>;
+        case 'h4': return <h4 ref={ref} style={style} className={classes}>{text}</h4>;
+        case 'h5': return <h5 ref={ref} style={style} className={classes}>{text}</h5>;
+        case 'h6': return <h6 ref={ref} style={style} className={classes}>{text}</h6>;
+        default: return <p ref={ref} style={style} className={classes}>{text}</p>;
     }
   };
   return renderTag();

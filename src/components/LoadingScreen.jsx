@@ -63,7 +63,7 @@ const LoadingScreen = ({ logoStr, children }) => {
   });
 
   return (
-    <div className="overflow-hidden h-screen w-screen flex justify-center items-center bg-black">
+    <div className="flex justify-center items-center min-h-screen min-w-screen bg-black">
       {phase === 'logo' && (
         <AnimatedContent
           distance={150}
